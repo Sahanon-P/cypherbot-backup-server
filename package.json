@@ -10,11 +10,10 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
+    "vercel": "^28.18.3",
     "winston": "^3.8.2"
   },
   "scripts": {
-    "build": "yarn install",
     "start": "node index.js"
- }
-  
+  }
 }
