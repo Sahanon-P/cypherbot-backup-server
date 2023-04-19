@@ -20,30 +20,14 @@ app.use(express.urlencoded({
 
 app.post("/arbitrage", async function(req, res){
     let money = req.query.money;
-    let provider = req.query.provider 
-    let total_percentage = getRandomArbitrary(1,100);
-    let total_profit = parseFloat(money) * (total_percentage/100);
-    console.log(`arbitrage call with money: ${money}, provider: ${[provider]}`)
-    res.send({
-        "total_profit": total_profit,
-        "total_percentage": total_percentage,
-        "time_spending": getRandomArbitrary(5,20),
-        "list_token": [
-            {
-                token_name: "A",
-                value: getRandomArbitrary(100,2000),
-            },
-            {
-                token_name: "B",
-                value: getRandomArbitrary(100,2000),
-            },
-            {
-                token_name: "C",
-                value: getRandomArbitrary(100,2000),
-            },
+    let provider = req.query.provider
+    axios.get(`https://firstykus44.pythonanywhere.com/cycle?price=${money}`).then((response => {
+        console.log(`info: /arbitrage is called with money: ${money}`);
+        var data = response.data;
+        res.send(data);
+    }))
 
-        ],
-    }).status(200);
+    
 })
 
 app.get("/info", function (req, res){
